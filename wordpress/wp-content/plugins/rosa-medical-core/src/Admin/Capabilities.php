@@ -12,6 +12,7 @@ final class Capabilities
 
     /** @var list<string> */
     private const FORBIDDEN_CAPABILITIES = [
+        'manage_options',
         'activate_plugins',
         'delete_plugins',
         'edit_plugins',
@@ -19,10 +20,13 @@ final class Capabilities
         'update_plugins',
         'delete_themes',
         'edit_themes',
+        'edit_theme_options',
         'install_themes',
         'switch_themes',
         'update_themes',
         'update_core',
+        'customize',
+        'unfiltered_html',
     ];
 
     public static function ensure(): void
