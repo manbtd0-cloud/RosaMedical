@@ -8,6 +8,7 @@ final class ElementorRenderCache
 {
     public const OPTION = 'rosa_elementor_render_cache_version';
     public const VERSION = '2026-09-06-live-visual-recovery-1';
+    private const TEMPLATE = 'page-templates/rosa-elementor-authoring.php';
 
     public static function ensureFresh(): void
     {
@@ -29,7 +30,7 @@ final class ElementorRenderCache
             'numberposts' => -1,
             'fields' => 'ids',
             'meta_key' => '_wp_page_template',
-            'meta_value' => ElementorPageSeeder::TEMPLATE,
+            'meta_value' => self::TEMPLATE,
         ]);
 
         foreach ((array) $postIds as $postId) {
