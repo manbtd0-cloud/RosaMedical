@@ -7,6 +7,7 @@ VIDEO="$ROOT/wordpress/scripts/client-preview-video-capture.sh"
 CAPTURE_HELPER="$ROOT/wordpress/scripts/client-preview-capture.mjs"
 VIDEO_REVIEW="$ROOT/wordpress/scripts/client-preview-video-review.mjs"
 PARITY_CAPTURE="$ROOT/wordpress/scripts/medicashop-elementor-parity-capture.mjs"
+SECONDARY_FIDELITY="$ROOT/wordpress/scripts/tests/client-preview-secondary-fidelity.test.mjs"
 fail(){ printf 'FAIL: %s\n' "$1" >&2; exit 1; }
 [[ -f "$RUNTIME" ]] || fail 'client preview runtime verifier missing'
 [[ -f "$CAPTURE" ]] || fail 'client preview responsive capture missing'
@@ -14,6 +15,7 @@ fail(){ printf 'FAIL: %s\n' "$1" >&2; exit 1; }
 [[ -f "$CAPTURE_HELPER" ]] || fail 'client preview media-settling helper missing'
 [[ -f "$VIDEO_REVIEW" ]] || fail 'client preview video review helper missing'
 [[ -f "$PARITY_CAPTURE" ]] || fail 'finished-template parity capture missing'
+[[ -f "$SECONDARY_FIDELITY" ]] || fail 'secondary-page finished-target fidelity test missing'
 grep -Fq 'client-preview-seed.sh' "$RUNTIME" || fail 'runtime verifier does not seed client preview'
 grep -Fq 'medicashop-elementor-reference-contract.test.sh' "$RUNTIME" || fail 'runtime verifier omits finished-template source authority contract'
 grep -Fq 'medicashop-elementor-home-contract.test.php' "$RUNTIME" || fail 'runtime verifier omits finished-template Elementor topology contract'
@@ -31,6 +33,17 @@ grep -Fq 'client-preview-accessibility.test.mjs' "$RUNTIME" || fail 'runtime ver
 grep -Fq 'client-preview-video-review.mjs' "$VIDEO" || fail 'video capture does not inspect the generated recording'
 grep -Fq 'https://rosamedical.org/' "$PARITY_CAPTURE" || fail 'finished-template capture does not default to deployed visual reference'
 grep -Fq 'artifacts/medicashop-elementor-parity' "$PARITY_CAPTURE" || fail 'finished-template capture output directory changed'
+for route in '/about/' '/contact/' '/shop/' '/ar/about/' '/ar/contact/' '/ar/shop/'; do
+  grep -Fq "$route" "$PARITY_CAPTURE" || fail "finished-template parity capture omits $route"
+done
+grep -Fq 'referenceBase' "$SECONDARY_FIDELITY" || fail 'secondary fidelity test does not accept a reference runtime'
+grep -Fq 'currentBase' "$SECONDARY_FIDELITY" || fail 'secondary fidelity test does not accept a current runtime'
+grep -Fq 'position: 2' "$SECONDARY_FIDELITY" || fail 'secondary fidelity position tolerance changed'
+grep -Fq 'size: 2' "$SECONDARY_FIDELITY" || fail 'secondary fidelity size tolerance changed'
+grep -Fq 'font: 0.6' "$SECONDARY_FIDELITY" || fail 'secondary fidelity font tolerance changed'
+grep -Fq 'spacing: 1' "$SECONDARY_FIDELITY" || fail 'secondary fidelity spacing tolerance changed'
+grep -Fq 'TEXT_DIFF:' "$SECONDARY_FIDELITY" || fail 'secondary fidelity test does not classify text/content differences separately'
+! grep -Fq 'admin-post.php' "$SECONDARY_FIDELITY" || fail 'secondary fidelity test reintroduced a Contact submission backend requirement'
 ! grep -Eq 'printf .*\| grep -' "$RUNTIME" || fail 'runtime verifier uses grep -q pipelines that are unsafe under pipefail; use here-strings'
 python3 - "$VIDEO" <<'PY'
 import sys
