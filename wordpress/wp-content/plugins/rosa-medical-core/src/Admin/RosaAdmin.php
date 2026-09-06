@@ -15,7 +15,7 @@ final class RosaAdmin
         add_menu_page(
             __('Rosa Medical', 'rosa-medical'),
             __('Rosa Medical', 'rosa-medical'),
-            'manage_options',
+            Capabilities::MANAGE_CONTENT,
             self::ROOT_SLUG,
             static fn(): mixed => ElementorShortcutPage::render('home', 'Homepage'),
             'dashicons-heart',
@@ -26,7 +26,7 @@ final class RosaAdmin
             self::ROOT_SLUG,
             __('Rosa Medical — Homepage', 'rosa-medical'),
             __('Homepage', 'rosa-medical'),
-            'manage_options',
+            Capabilities::MANAGE_CONTENT,
             self::ROOT_SLUG,
             static fn(): mixed => ElementorShortcutPage::render('home', 'Homepage')
         );
@@ -35,7 +35,7 @@ final class RosaAdmin
             self::ROOT_SLUG,
             __('Rosa Medical — About', 'rosa-medical'),
             __('About', 'rosa-medical'),
-            'manage_options',
+            Capabilities::MANAGE_CONTENT,
             'rosa-medical-about',
             static fn(): mixed => ElementorShortcutPage::render('about', 'About')
         );
@@ -44,7 +44,7 @@ final class RosaAdmin
             self::ROOT_SLUG,
             __('Rosa Medical — Contact', 'rosa-medical'),
             __('Contact', 'rosa-medical'),
-            'manage_options',
+            Capabilities::MANAGE_CONTENT,
             'rosa-medical-contact',
             static fn(): mixed => ElementorShortcutPage::render('contact', 'Contact')
         );
@@ -56,7 +56,7 @@ final class RosaAdmin
             self::ROOT_SLUG,
             __('Rosa Business Settings', 'rosa-medical'),
             __('Business', 'rosa-medical'),
-            'manage_options',
+            Capabilities::MANAGE_CONTENT,
             'rosa-business-settings',
             [BusinessSettings::class, 'renderPage']
         );
@@ -90,7 +90,7 @@ final class RosaAdmin
             self::ROOT_SLUG,
             sprintf(__('Rosa Medical — %s', 'rosa-medical'), $label),
             __($label, 'rosa-medical'),
-            'manage_options',
+            Capabilities::MANAGE_CONTENT,
             $slug,
             static fn(): mixed => ContentPage::render($section)
         );
