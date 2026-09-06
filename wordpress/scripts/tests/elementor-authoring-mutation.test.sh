@@ -46,7 +46,16 @@ restore(){
       \$backup = get_option('rosa_elementor_mutation_raw_backup_' . \$id, null);
       if (! is_string(\$backup) || \$backup === '') continue;
       update_post_meta((int) \$id, '_elementor_data', wp_slash(\$backup));
+
+      // Direct _elementor_data restoration bypasses Document::save(), which is
+      // normally responsible for invalidating Elementor's rendered-element
+      // cache and generated post CSS. Without this, the database can be back
+      // to the exact original JSON while the frontend still serves the test
+      // mutation from _elementor_element_cache.
+      delete_post_meta((int) \$id, '_elementor_element_cache');
+      delete_post_meta((int) \$id, '_elementor_css');
       clean_post_cache((int) \$id);
+
       \$restored = get_post_meta((int) \$id, '_elementor_data', true);
       if (! is_string(\$restored) || ! hash_equals(hash('sha256', \$backup), hash('sha256', \$restored))) {
           WP_CLI::error('Exact Elementor JSON restore mismatch for post ' . \$id);
@@ -54,7 +63,7 @@ restore(){
       delete_option('rosa_elementor_mutation_raw_backup_' . \$id);
   }
   " >/dev/null
-  printf 'RESTORED: exact Elementor mutation JSON fixtures\n'
+  printf 'RESTORED: exact Elementor mutation JSON fixtures and invalidated rendered caches\n'
 }
 trap restore EXIT
 
