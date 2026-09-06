@@ -11,7 +11,6 @@ $shopUrl = $locale === 'ar' ? home_url('/ar/shop/') : (get_post_type_archive_lin
 
 $heroTitle = $c('hero_title', 'Find Product', 'اعثر على المنتج');
 if (($locale === 'en' && trim($heroTitle) === 'Shop') || ($locale === 'ar' && trim($heroTitle) === 'المنتجات')) {
-    // Preserve custom edits while retiring only the obsolete seeded generic title.
     $heroTitle = $locale === 'ar' ? 'اعثر على المنتج' : 'Find Product';
 }
 
@@ -100,25 +99,24 @@ $workflow = $locale === 'ar'
           wp_reset_postdata();
       endif;
 
-      // Local/staging datasets can intentionally contain only a representative
-      // product. Fill the catalogue surface with Woo family taxonomy entries so
-      // the public layout remains useful without inventing duplicate product data.
-      if ($rendered < 5) :
-          foreach ($families as $family) :
-              get_template_part('template-parts/client-preview/product-card', null, [
-                  'family' => [
-                      'label' => $family['label'],
-                      'url' => $familyUrl($family['slug']),
-                  ],
-                  'locale' => $locale,
-                  'media_slot' => 'catalogue-family-' . $family['slug'],
-              ]);
-              $rendered++;
-              if ($rendered >= 5) {
-                  break;
-              }
-          endforeach;
-      endif;
+      // The frozen public Shop has a dense catalogue surface. In representative
+      // local datasets, supplement the real Woo products with family-navigation
+      // cards only; product truth itself remains exclusively in WooCommerce.
+      $familySequence = [0, 1, 2, 3, 4, 0, 2, 3, 4, 1, 2, 0];
+      $familyCursor = 0;
+      while ($rendered < 12) :
+          $family = $families[$familySequence[$familyCursor % count($familySequence)]];
+          get_template_part('template-parts/client-preview/product-card', null, [
+              'family' => [
+                  'label' => $family['label'],
+                  'url' => $familyUrl($family['slug']),
+              ],
+              'locale' => $locale,
+              'media_slot' => 'catalogue-family-' . $family['slug'],
+          ]);
+          $rendered++;
+          $familyCursor++;
+      endwhile;
 
       if ($rendered === 0) : ?>
         <p class="rosa-preview-shop-empty"><?php echo esc_html($c('empty_state', 'No products matched this view.', 'لا توجد منتجات متاحة في هذه المعاينة.')); ?></p>
@@ -143,24 +141,23 @@ $workflow = $locale === 'ar'
 </section>
 
 <section class="rosa-live-shop-support" data-preview-shop-support>
-  <div class="rosa-preview-rail">
-    <div class="rosa-live-shop-heading rosa-live-shop-heading--center">
-      <div>
-        <p class="rosa-preview-eyebrow"><?php echo esc_html($locale === 'ar' ? 'دعم التوريد' : 'PROCUREMENT SUPPORT'); ?></p>
-        <h2><?php echo esc_html($locale === 'ar' ? 'دعم واضح من الكتالوج إلى طلب عرض السعر' : 'Clear support from catalogue discovery to quotation'); ?></h2>
-      </div>
+  <div class="rosa-preview-rail rosa-live-shop-support__layout">
+    <div class="rosa-live-shop-support__intro">
+      <p class="rosa-preview-eyebrow"><?php echo esc_html($locale === 'ar' ? 'دعم التوريد' : 'PROCUREMENT SUPPORT'); ?></p>
+      <h2><?php echo esc_html($locale === 'ar' ? 'دعم واضح من الكتالوج إلى طلب عرض السعر' : 'Clear support from catalogue discovery to quotation'); ?></h2>
+      <?php get_template_part('template-parts/client-preview/media-slot', null, ['slot' => 'home-why-01', 'label' => $locale === 'ar' ? 'دعم توريد أدوات روزا' : 'Rosa instrument procurement']); ?>
     </div>
     <div class="rosa-live-shop-support__grid">
-      <article><span>01</span><h3><?php echo esc_html($locale === 'ar' ? 'مراجع واضحة' : 'Clear references'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'استخدم أسماء الفئات وأكواد الكتالوج عند تحديد احتياجك.' : 'Use family names and catalogue codes when identifying your requirement.'); ?></p></article>
-      <article><span>02</span><h3><?php echo esc_html($locale === 'ar' ? 'تكوينات دقيقة' : 'Exact configurations'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'راجع الخيارات المتاحة للأداة قبل إرسال الطلب.' : 'Review the available instrument options before sending your request.'); ?></p></article>
-      <article><span>03</span><h3><?php echo esc_html($locale === 'ar' ? 'تواصل مباشر' : 'Direct support'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'شارك متطلباتك مع فريق روزا للحصول على دعم عرض السعر.' : 'Share your requirements with the Rosa team for quotation support.'); ?></p></article>
+      <article><span>01</span><div><h3><?php echo esc_html($locale === 'ar' ? 'مراجع واضحة' : 'Clear references'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'استخدم أسماء الفئات وأكواد الكتالوج عند تحديد احتياجك.' : 'Use family names and catalogue codes when identifying your requirement.'); ?></p></div></article>
+      <article><span>02</span><div><h3><?php echo esc_html($locale === 'ar' ? 'تكوينات دقيقة' : 'Exact configurations'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'راجع الخيارات المتاحة للأداة قبل إرسال الطلب.' : 'Review the available instrument options before sending your request.'); ?></p></div></article>
+      <article><span>03</span><div><h3><?php echo esc_html($locale === 'ar' ? 'تواصل مباشر' : 'Direct support'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'شارك متطلباتك مع فريق روزا للحصول على دعم عرض السعر.' : 'Share your requirements with the Rosa team for quotation support.'); ?></p></div></article>
     </div>
   </div>
 </section>
 
 <section class="rosa-live-shop-families" data-preview-shop-families>
   <div class="rosa-preview-rail">
-    <div class="rosa-live-shop-heading">
+    <div class="rosa-live-shop-heading rosa-live-shop-families__heading">
       <div>
         <p class="rosa-preview-eyebrow"><?php echo esc_html($locale === 'ar' ? 'فئات الأدوات' : 'INSTRUMENT FAMILIES'); ?></p>
         <h2><?php echo esc_html($locale === 'ar' ? 'ابدأ من الفئة المناسبة' : 'Start with the right instrument family'); ?></h2>
