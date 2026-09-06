@@ -1,367 +1,221 @@
-/*
- * Shop live-visual recovery.
- * Structural first pass against the frozen rosamedical.org Shop baseline.
- * Fine-grained geometry is tuned only after live-vs-local screenshot review.
- */
+/* Shop live-visual recovery — tuned from frozen 2026-09-06 screenshots. */
 
 .rosa-live-shop-hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(4.75rem, 8vw, 7.25rem);
-  background:
-    radial-gradient(circle at 82% 28%, rgb(255 255 255 / .2), transparent 28%),
-    linear-gradient(112deg, #c9828c 0%, #d8949d 50%, #e3a0a8 100%);
+  padding-block: clamp(3.4rem, 5.4vw, 5rem);
+  background: linear-gradient(112deg, #c7838c 0%, #d9949d 54%, #e5a0a8 100%);
   color: #fff;
   text-align: center;
 }
 
-.rosa-live-shop-hero::after {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(90deg, rgb(80 41 51 / .08), transparent 38%, rgb(255 255 255 / .04));
-  content: "";
-}
-
-.rosa-live-shop-hero__inner {
-  position: relative;
-  z-index: 1;
-}
-
-.rosa-live-shop-hero .rosa-preview-eyebrow {
-  color: rgb(255 255 255 / .8);
-}
-
+.rosa-live-shop-hero__inner { position: relative; z-index: 1; }
+.rosa-live-shop-hero .rosa-preview-eyebrow { color: rgb(255 255 255 / .82); }
 .rosa-live-shop-hero h1 {
-  margin: .2rem 0 .8rem;
+  margin: .1rem 0 .65rem;
   color: #fff !important;
-  font-size: clamp(2.8rem, 6vw, 5.25rem);
+  font-size: clamp(2.55rem, 5vw, 4.5rem);
   font-weight: 600;
-  letter-spacing: -.055em;
+  letter-spacing: -.05em;
   line-height: 1;
 }
-
 .rosa-live-shop-hero > .rosa-preview-rail > p:not(.rosa-preview-eyebrow) {
-  max-width: 38rem;
-  margin: 0 auto 2rem;
+  max-width: 36rem;
+  margin: 0 auto 1.35rem;
   color: rgb(255 255 255 / .92);
 }
-
 .rosa-live-shop-search {
-  width: min(46rem, 100%);
+  width: min(45rem, 100%);
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: .65rem;
+  gap: .45rem;
   margin-inline: auto;
-  padding: .55rem;
-  border-radius: .45rem;
+  padding: .4rem;
+  border-radius: .35rem;
   background: #fff;
-  box-shadow: 0 1rem 2.5rem rgb(64 30 37 / .16);
+  box-shadow: 0 .8rem 2rem rgb(64 30 37 / .13);
 }
-
 .rosa-live-shop-search input[type="search"] {
   min-width: 0;
-  min-height: 3rem;
+  min-height: 2.6rem;
   border: 0;
   background: #fff;
-  padding: .8rem 1rem;
+  padding: .65rem .8rem;
   color: var(--preview-ink);
   font: inherit;
   outline: 0;
 }
-
-.rosa-live-shop-search .rosa-preview-button {
-  min-width: 8rem;
-  border: 0;
-}
+.rosa-live-shop-search .rosa-preview-button { min-width: 6.75rem; border: 0; }
 
 .rosa-live-shop-catalogue,
 .rosa-live-shop-support,
-.rosa-live-shop-families {
-  padding-block: clamp(4.5rem, 7vw, 7rem);
-}
-
-.rosa-live-shop-catalogue {
-  background: #fff;
-}
-
+.rosa-live-shop-families { padding-block: clamp(3.25rem, 5.2vw, 5.25rem); }
+.rosa-live-shop-catalogue { background: #fff; }
 .rosa-live-shop-heading {
   display: flex;
   align-items: end;
   justify-content: space-between;
   gap: 2rem;
-  margin-block-end: 2.75rem;
+  margin-block-end: 2rem;
 }
-
-.rosa-live-shop-heading > div {
-  max-width: 44rem;
-}
-
+.rosa-live-shop-heading > div { max-width: 42rem; }
 .rosa-live-shop-heading h2,
-.rosa-live-shop-workflow h2 {
+.rosa-live-shop-workflow h2,
+.rosa-live-shop-support h2 {
   margin: 0;
   color: var(--preview-ink);
-  font-size: clamp(2rem, 3.5vw, 3.35rem);
+  font-size: clamp(1.9rem, 3vw, 3rem);
   font-weight: 600;
   letter-spacing: -.045em;
   line-height: 1.08;
 }
-
-.rosa-live-shop-heading > p {
-  max-width: 31rem;
-  margin: 0;
-  color: var(--preview-muted);
-  line-height: 1.65;
-}
-
-.rosa-live-shop-heading--center {
-  justify-content: center;
-  text-align: center;
-}
+.rosa-live-shop-heading > p { max-width: 28rem; margin: 0; color: var(--preview-muted); line-height: 1.55; }
 
 .rosa-live-shop-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(1.25rem, 2vw, 1.8rem);
+  gap: clamp(.85rem, 1.4vw, 1.25rem);
 }
-
 .rosa-live-shop-grid .rosa-preview-product {
   min-width: 0;
-  padding: .75rem;
-  border-radius: .55rem;
+  padding: .55rem;
+  border-radius: .35rem;
   background: #fff;
-  box-shadow: 0 .8rem 2.25rem rgb(17 18 20 / .07);
+  box-shadow: 0 .55rem 1.5rem rgb(17 18 20 / .06);
 }
-
-.rosa-live-shop-grid .rosa-preview-product__media {
-  aspect-ratio: 1 / .86;
-  border-radius: .4rem;
-  background: #f4f4f4;
-}
-
-.rosa-live-shop-grid .rosa-preview-product__body {
-  padding: 1rem .25rem .35rem;
-}
-
-.rosa-live-shop-grid .rosa-preview-product h3 {
-  min-height: 3rem;
-}
+.rosa-live-shop-grid .rosa-preview-product__media { aspect-ratio: 1 / .88; border-radius: .3rem; background: #f4f4f4; }
+.rosa-live-shop-grid .rosa-preview-product__body { padding: .7rem .1rem .2rem; }
+.rosa-live-shop-grid .rosa-preview-product h3 { min-height: 2.2rem; margin-block: .2rem .45rem; }
+.rosa-live-shop-grid .rosa-preview-product__family { font-size: .64rem; }
+.rosa-live-shop-grid .rosa-preview-product__price { margin-block: .35rem; font-size: .72rem; }
+.rosa-live-shop-grid .rosa-preview-product__action { font-size: .7rem; }
 
 .rosa-live-shop-workflow {
-  padding-block: clamp(5rem, 8vw, 7.5rem);
-  background: #f4f4f5;
+  padding-block: clamp(4rem, 6vw, 5.75rem);
+  background: linear-gradient(135deg, #d4242d 0%, #a42d3d 64%, #1f232a 150%);
+  color: #fff;
 }
-
 .rosa-live-shop-workflow__layout {
   display: grid;
-  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-  gap: clamp(2rem, 5vw, 5.5rem);
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: clamp(2rem, 4.5vw, 4.5rem);
   align-items: center;
 }
-
-.rosa-live-shop-workflow__intro > p:last-child {
-  max-width: 35rem;
-  margin: 1.25rem 0 0;
-  line-height: 1.7;
-}
-
-.rosa-live-shop-workflow__steps {
-  display: grid;
-  gap: .75rem;
-}
-
+.rosa-live-shop-workflow .rosa-preview-eyebrow,
+.rosa-live-shop-workflow h2,
+.rosa-live-shop-workflow__intro > p:last-child { color: #fff; }
+.rosa-live-shop-workflow__intro > p:last-child { max-width: 32rem; margin: 1rem 0 0; line-height: 1.6; opacity: .9; }
+.rosa-live-shop-workflow__steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
 .rosa-live-shop-workflow__steps article {
-  display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
-  gap: 1rem;
-  align-items: start;
-  padding: 1.35rem 1.5rem;
-  border-radius: .45rem;
+  min-width: 0;
+  min-height: 10.5rem;
+  padding: 1.25rem;
+  border-radius: .35rem;
   background: #fff;
-  box-shadow: 0 .75rem 2rem rgb(17 18 20 / .06);
+  color: var(--preview-ink);
+  box-shadow: 0 .65rem 1.5rem rgb(30 15 20 / .12);
 }
-
 .rosa-live-shop-workflow__steps article > span,
 .rosa-live-shop-support__grid article > span {
-  width: 2.75rem;
-  height: 2.75rem;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: rgb(224 8 21 / .09);
-  color: var(--preview-accent);
-  font-size: .75rem;
-  font-weight: 800;
+  width: 2.3rem; height: 2.3rem; display: grid; place-items: center; border-radius: 50%;
+  background: rgb(224 8 21 / .1); color: var(--preview-accent); font-size: .7rem; font-weight: 800;
 }
-
 .rosa-live-shop-workflow__steps h3,
-.rosa-live-shop-support__grid h3 {
-  margin: 0 0 .3rem;
-  color: var(--preview-ink);
-  font-size: 1rem;
-}
-
+.rosa-live-shop-support__grid h3 { margin: .8rem 0 .25rem; color: var(--preview-ink); font-size: .95rem; }
 .rosa-live-shop-workflow__steps p,
-.rosa-live-shop-support__grid p {
-  margin: 0;
-  line-height: 1.6;
-}
+.rosa-live-shop-support__grid p { margin: 0; line-height: 1.5; }
 
-.rosa-live-shop-support {
-  background: #fff;
-}
-
-.rosa-live-shop-support__grid {
+.rosa-live-shop-support { background: #fff; }
+.rosa-live-shop-support__layout {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
 }
-
+.rosa-live-shop-support__intro .rosa-preview-media {
+  margin-block-start: 1.6rem;
+  min-height: 15rem;
+  border-radius: .35rem;
+}
+.rosa-live-shop-support__grid { display: grid; gap: .7rem; }
 .rosa-live-shop-support__grid article {
-  min-height: 14rem;
-  padding: 2rem;
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0,1fr);
+  gap: .9rem;
+  align-items: start;
+  padding: 1.15rem 1.25rem;
   border: 1px solid var(--preview-border);
-  border-radius: .45rem;
+  border-radius: .35rem;
   background: #fff;
+  box-shadow: 0 .4rem 1.2rem rgb(17 18 20 / .04);
 }
+.rosa-live-shop-support__grid h3 { margin: 0 0 .2rem; }
 
-.rosa-live-shop-support__grid article > span {
-  margin-block-end: 1.5rem;
-}
-
-.rosa-live-shop-support__grid h3 {
-  font-size: 1.15rem;
-}
-
-.rosa-live-shop-families {
-  background: #f5f5f6;
-}
-
+.rosa-live-shop-families { padding-block: clamp(2.5rem, 4vw, 3.75rem); background: #f5f5f6; }
+.rosa-live-shop-families__heading { margin-block-end: 1.25rem; }
+.rosa-live-shop-families__heading h2 { font-size: clamp(1.6rem, 2.4vw, 2.35rem); }
 .rosa-live-shop-families__grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   border-block: 1px solid var(--preview-border);
 }
-
 .rosa-live-shop-families__grid a {
   min-width: 0;
-  min-height: 8.5rem;
+  min-height: 4.1rem;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: .7rem;
+  gap: .45rem;
   align-items: center;
-  padding: 1.25rem;
+  padding: .8rem .9rem;
   border-inline-end: 1px solid var(--preview-border);
   color: var(--preview-ink);
   text-decoration: none;
 }
-
-.rosa-live-shop-families__grid a:last-child {
-  border-inline-end: 0;
-}
-
-.rosa-live-shop-families__grid span {
-  color: var(--preview-accent);
-  font-size: .7rem;
-  font-weight: 800;
-}
-
-.rosa-live-shop-families__grid strong {
-  min-width: 0;
-  font-size: 1rem;
-}
-
-.rosa-live-shop-families__grid b {
-  font-size: 1.25rem;
-  font-weight: 400;
-}
+.rosa-live-shop-families__grid a:last-child { border-inline-end: 0; }
+.rosa-live-shop-families__grid span { color: var(--preview-accent); font-size: .62rem; font-weight: 800; }
+.rosa-live-shop-families__grid strong { min-width: 0; font-size: .78rem; }
+.rosa-live-shop-families__grid b { font-size: .9rem; font-weight: 400; }
 
 html[dir="rtl"] .rosa-live-shop-heading,
 html[dir="rtl"] .rosa-live-shop-workflow__intro,
 html[dir="rtl"] .rosa-live-shop-workflow__steps article,
-html[dir="rtl"] .rosa-live-shop-support__grid article {
-  text-align: right;
-}
-
-html[dir="rtl"] .rosa-live-shop-families__grid b {
-  transform: scaleX(-1);
-}
+html[dir="rtl"] .rosa-live-shop-support__intro,
+html[dir="rtl"] .rosa-live-shop-support__grid article { text-align: right; }
+html[dir="rtl"] .rosa-live-shop-families__grid b { transform: scaleX(-1); }
 
 @media (max-width: 64rem) {
-  .rosa-live-shop-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .rosa-live-shop-families__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .rosa-live-shop-families__grid a:nth-child(3n) {
-    border-inline-end: 0;
-  }
+  .rosa-live-shop-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .rosa-live-shop-workflow__layout { grid-template-columns: 1fr; }
+  .rosa-live-shop-workflow__steps { grid-template-columns: repeat(3, minmax(0,1fr)); }
 }
 
 @media (max-width: 48rem) {
-  .rosa-live-shop-hero {
-    padding-block: 4rem;
-  }
-
-  .rosa-live-shop-search {
-    grid-template-columns: 1fr;
-  }
-
-  .rosa-live-shop-search .rosa-preview-button {
-    width: 100%;
-  }
-
-  .rosa-live-shop-heading {
-    display: grid;
-    gap: 1rem;
-    align-items: start;
-  }
-
-  .rosa-live-shop-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .rosa-live-shop-workflow__layout,
-  .rosa-live-shop-support__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .rosa-live-shop-families__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .rosa-live-shop-families__grid a,
-  .rosa-live-shop-families__grid a:nth-child(3n) {
-    border-inline-end: 1px solid var(--preview-border);
-  }
-
-  .rosa-live-shop-families__grid a:nth-child(2n) {
-    border-inline-end: 0;
-  }
-}
-
-@media (max-width: 30rem) {
-  .rosa-live-shop-hero h1 {
-    font-size: 2.7rem;
-  }
-
-  .rosa-live-shop-grid,
-  .rosa-live-shop-families__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .rosa-live-shop-families__grid a,
-  .rosa-live-shop-families__grid a:nth-child(2n),
-  .rosa-live-shop-families__grid a:nth-child(3n) {
-    min-height: 5.75rem;
-    border-inline-end: 0;
-    border-block-end: 1px solid var(--preview-border);
-  }
-
-  .rosa-live-shop-families__grid a:last-child {
-    border-block-end: 0;
-  }
+  .rosa-live-shop-hero { padding-block: 2.7rem; }
+  .rosa-live-shop-hero h1 { font-size: 2.45rem; }
+  .rosa-live-shop-hero > .rosa-preview-rail > p:not(.rosa-preview-eyebrow) { margin-block-end: 1rem; }
+  .rosa-live-shop-search { grid-template-columns: 1fr; width: 100%; }
+  .rosa-live-shop-search .rosa-preview-button { width: 100%; min-height: 2.3rem; }
+  .rosa-live-shop-heading { display: grid; gap: .7rem; align-items: start; }
+  .rosa-live-shop-catalogue { padding-block: 2.25rem; }
+  .rosa-live-shop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+  .rosa-live-shop-grid .rosa-preview-product { padding: .4rem; }
+  .rosa-live-shop-grid .rosa-preview-product__body { padding-top: .55rem; }
+  .rosa-live-shop-grid .rosa-preview-product h3 { min-height: 1.8rem; font-size: .8rem; }
+  .rosa-live-shop-workflow { padding-block: 3rem; }
+  .rosa-live-shop-workflow__layout { gap: 1.5rem; }
+  .rosa-live-shop-workflow__steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .45rem; }
+  .rosa-live-shop-workflow__steps article { min-height: 9rem; padding: .75rem; }
+  .rosa-live-shop-workflow__steps article > span { width: 1.9rem; height: 1.9rem; }
+  .rosa-live-shop-workflow__steps h3 { font-size: .72rem; }
+  .rosa-live-shop-workflow__steps p { font-size: .64rem; line-height: 1.35; }
+  .rosa-live-shop-support { padding-block: 3rem; }
+  .rosa-live-shop-support__layout { grid-template-columns: 1fr; gap: 1.2rem; }
+  .rosa-live-shop-support__intro .rosa-preview-media { min-height: 11rem; }
+  .rosa-live-shop-support__grid article { padding: .9rem; }
+  .rosa-live-shop-families { padding-block: 2.25rem; }
+  .rosa-live-shop-families__grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .rosa-live-shop-families__grid a { min-height: 3.4rem; padding: .5rem .35rem; grid-template-columns: 1fr; gap: .15rem; text-align: center; border-inline-end: 0; }
+  .rosa-live-shop-families__grid span,
+  .rosa-live-shop-families__grid b { display: none; }
+  .rosa-live-shop-families__grid strong { font-size: .58rem; }
 }
