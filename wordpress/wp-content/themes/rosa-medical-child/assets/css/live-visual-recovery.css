@@ -1,0 +1,223 @@
+/*
+ * Live visual recovery overrides.
+ *
+ * This file is intentionally layered after the historical client-preview CSS.
+ * Each recovered public surface is added only after a live-vs-local RED proves
+ * that the historical style is not the approved rosamedical.org presentation.
+ */
+
+/* Contact — frozen 2026-09-06 live topology */
+.rosa-preview-page-hero--contact {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(5rem, 9vw, 7.5rem);
+  background-color: #191b20;
+  background-image:
+    radial-gradient(circle at 82% 22%, rgb(224 8 21 / .36), transparent 34%),
+    linear-gradient(135deg, #17191d 0%, #26252a 42%, #6f1118 74%, #e00815 100%);
+  color: rgb(255 255 255 / .84);
+}
+
+.rosa-preview-page-hero--contact::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgb(255 255 255 / .035), transparent 45%);
+  content: "";
+}
+
+.rosa-preview-page-hero--contact > .rosa-preview-rail {
+  position: relative;
+  z-index: 1;
+}
+
+.rosa-preview-page-hero--contact .rosa-preview-eyebrow {
+  color: #fff;
+}
+
+.rosa-preview-page-hero--contact h1 {
+  color: #fff !important;
+}
+
+.rosa-preview-page-hero--contact > .rosa-preview-rail > p:last-child {
+  color: rgb(255 255 255 / .82);
+}
+
+.rosa-preview-contact {
+  padding-block: clamp(4.5rem, 8vw, 7rem);
+  background: #f5f5f6;
+}
+
+.rosa-preview-contact__cards {
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: stretch;
+}
+
+.rosa-preview-contact__card {
+  min-width: 0;
+  border: 1px solid rgb(17 18 20 / .07);
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 1.75rem 4.5rem rgb(17 18 20 / .08);
+  padding: clamp(2rem, 4vw, 3.75rem);
+}
+
+.rosa-preview-contact__conversation-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.rosa-preview-contact__conversation-card h2,
+.rosa-preview-contact__message-card h2 {
+  margin: 0;
+  color: var(--preview-ink);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -.045em;
+  line-height: 1.08;
+}
+
+.rosa-preview-contact__intro {
+  max-width: 34rem;
+  margin: 1.25rem 0 0;
+  color: var(--preview-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.rosa-preview-contact__channels {
+  display: grid;
+  margin-block-start: auto;
+  padding-block-start: clamp(2rem, 4vw, 3rem);
+}
+
+.rosa-preview-contact__channel {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding-block: 1.125rem;
+  border-block-start: 1px solid var(--preview-border);
+}
+
+.rosa-preview-contact__channel-number {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(224 8 21 / .09);
+  color: var(--preview-accent);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.rosa-preview-contact__channel > div {
+  min-width: 0;
+  display: grid;
+  gap: .3rem;
+}
+
+.rosa-preview-contact__channel-label {
+  color: var(--preview-muted);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.rosa-preview-contact__channel strong,
+.rosa-preview-contact__channel a {
+  min-width: 0;
+  color: var(--preview-ink);
+  font-size: 1rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.rosa-preview-contact__message-card {
+  background: #fff;
+}
+
+.rosa-preview-contact__message-card h2 {
+  margin-block-end: 2rem;
+}
+
+.rosa-preview-contact__message-card .rosa-preview-contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.rosa-preview-contact__message-card .rosa-preview-contact-form label {
+  display: grid;
+  gap: .5rem;
+  color: var(--preview-ink);
+  font-size: .8125rem;
+  font-weight: 700;
+}
+
+.rosa-preview-contact__message-card .rosa-preview-contact-form label:nth-of-type(3),
+.rosa-preview-contact__message-card .rosa-preview-contact-form label:nth-of-type(4),
+.rosa-preview-contact__message-card .rosa-preview-contact-form .rosa-preview-button {
+  grid-column: 1 / -1;
+}
+
+.rosa-preview-contact__message-card .rosa-preview-contact-form input,
+.rosa-preview-contact__message-card .rosa-preview-contact-form textarea {
+  min-block-size: 3.35rem;
+  width: 100%;
+  border: 1px solid #d9dce1;
+  border-radius: .4rem;
+  background: #fafafa;
+  padding: .85rem 1rem;
+  color: var(--preview-ink);
+  font: inherit;
+  outline: 0;
+}
+
+.rosa-preview-contact__message-card .rosa-preview-contact-form textarea {
+  min-block-size: 9.5rem;
+  resize: vertical;
+}
+
+.rosa-preview-contact__message-card .rosa-preview-contact-form input:focus,
+.rosa-preview-contact__message-card .rosa-preview-contact-form textarea:focus {
+  border-color: var(--preview-accent);
+  box-shadow: 0 0 0 3px rgb(224 8 21 / .1);
+}
+
+.rosa-preview-contact__message-card .rosa-preview-contact-form .rosa-preview-button {
+  width: max-content;
+  min-width: 10.5rem;
+  margin-block-start: .4rem;
+}
+
+@media (max-width: 48rem) {
+  .rosa-preview-contact__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .rosa-preview-contact__card {
+    padding: 1.75rem;
+  }
+
+  .rosa-preview-contact__channels {
+    margin-block-start: 1.75rem;
+    padding-block-start: 0;
+  }
+
+  .rosa-preview-contact__message-card .rosa-preview-contact-form {
+    grid-template-columns: 1fr;
+  }
+
+  .rosa-preview-contact__message-card .rosa-preview-contact-form label:nth-of-type(3),
+  .rosa-preview-contact__message-card .rosa-preview-contact-form label:nth-of-type(4),
+  .rosa-preview-contact__message-card .rosa-preview-contact-form .rosa-preview-button {
+    grid-column: auto;
+  }
+}
