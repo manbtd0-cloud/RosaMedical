@@ -11,8 +11,8 @@
   position: relative;
   overflow: hidden;
   padding-block: clamp(4.25rem, 6.8vw, 6rem);
-  background-color: #9a878c;
-  background-image: linear-gradient(112deg, #777780 0%, #9a888e 48%, #c98f95 76%, #df9399 100%);
+  background-color: #94858a;
+  background-image: linear-gradient(112deg, #777780 0%, #95878c 48%, #b98c93 76%, #cd9097 100%);
   color: rgb(255 255 255 / .94);
   text-align: center;
 }
@@ -21,7 +21,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(90deg, rgb(26 29 35 / .08), transparent 42%, rgb(224 8 21 / .06));
+  background: linear-gradient(90deg, rgb(26 29 35 / .08), transparent 42%, rgb(224 8 21 / .035));
   content: "";
 }
 
@@ -92,7 +92,7 @@
 .rosa-preview-contact__message-card h2 {
   margin: 0;
   color: var(--preview-ink);
-  font-size: clamp(1.75rem, 2.8vw, 2.35rem);
+  font-size: clamp(1.85rem, 3vw, 2.55rem);
   font-weight: 500;
   letter-spacing: -.04em;
   line-height: 1.12;
@@ -222,45 +222,58 @@
   font-size: .78rem;
 }
 
-/* Tablet: the frozen site keeps the two cards side-by-side at 1024px but
- * reduces the large procurement spacer substantially before the mobile stack. */
-@media (max-width: 64rem) and (min-width: 48.0625rem) {
-  .rosa-preview-contact {
-    padding-block-start: 3rem;
-    padding-block-end: 22rem;
-  }
-
-  .rosa-preview-contact__card {
-    min-height: 21rem;
-    padding: 1.9rem;
-  }
-}
-
-/* 768px is a distinct tablet stack in the frozen baseline. It is notably
- * tighter than narrow-phone layouts. */
-@media (max-width: 48rem) and (min-width: 37.5625rem) {
+/* Large desktop: the live capture carries a taller hero, more breathing room
+ * before the cards and slightly taller cards than the first recovery pass. */
+@media (min-width: 64.0625rem) {
   .rosa-preview-page-hero--contact {
-    padding-block: 3.55rem;
+    padding-block: clamp(4.9rem, 7.2vw, 6.7rem);
   }
 
   .rosa-preview-contact {
-    padding-block: 2.5rem 15rem;
+    padding-block-start: clamp(4.9rem, 5.6vw, 5.75rem);
+    padding-block-end: clamp(34rem, 39vw, 37rem);
   }
 
   .rosa-preview-contact__cards {
-    grid-template-columns: 1fr;
-    gap: .8rem;
+    grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
   }
 
   .rosa-preview-contact__card {
-    min-height: 0;
-    padding: 1.6rem 1.7rem;
+    min-height: 24rem;
   }
 }
 
-@media (max-width: 37.5rem) {
+/* Tablet: the frozen site keeps the two cards side-by-side through 768px.
+ * The wide blank procurement spacer remains, but is smaller than desktop. */
+@media (max-width: 64rem) and (min-width: 48rem) {
   .rosa-preview-page-hero--contact {
-    padding-block: 3.65rem;
+    padding-block: 4.35rem;
+  }
+
+  .rosa-preview-contact {
+    padding-block-start: 3.5rem;
+    padding-block-end: 27rem;
+  }
+
+  .rosa-preview-contact__cards {
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  }
+
+  .rosa-preview-contact__card {
+    min-height: 22rem;
+    padding: 1.9rem;
+  }
+
+  .rosa-preview-contact__message-card {
+    min-height: 23.5rem;
+  }
+}
+
+/* Narrow layouts stack only below 768px. The frozen 390/431 captures show
+ * the hero and form card taller than the prior recovery pass. */
+@media (max-width: 47.9375rem) {
+  .rosa-preview-page-hero--contact {
+    padding-block: 4.45rem;
   }
 
   .rosa-preview-page-hero--contact h1 {
@@ -292,7 +305,7 @@
   }
 
   .rosa-preview-contact__message-card {
-    min-height: 25.75rem;
+    min-height: 28.35rem;
   }
 
   .rosa-preview-contact__conversation-card .rosa-preview-eyebrow {
@@ -301,7 +314,7 @@
 
   .rosa-preview-contact__conversation-card h2,
   .rosa-preview-contact__message-card h2 {
-    font-size: 1.55rem;
+    font-size: 1.65rem;
     line-height: 1.16;
   }
 
@@ -348,6 +361,10 @@
 
   .rosa-preview-contact__message-card .rosa-preview-contact-form textarea {
     min-block-size: 7.8rem;
+  }
+
+  html[dir="rtl"] .rosa-preview-contact__conversation-card {
+    min-height: 16.1rem;
   }
 }
 
