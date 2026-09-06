@@ -8,7 +8,7 @@ final class ElementorShortcutPage
 {
     public static function render(string $path, string $label): void
     {
-        if (! current_user_can('manage_options')) {
+        if (! current_user_can(Capabilities::MANAGE_CONTENT)) {
             return;
         }
 
@@ -22,6 +22,11 @@ final class ElementorShortcutPage
         }
 
         $pageId = (int) $page->ID;
+        if (! current_user_can('edit_post', $pageId)) {
+            self::notice(__('You do not have permission to edit this page.', 'rosa-medical'), admin_url());
+            return;
+        }
+
         $document = false;
         if (class_exists('\\Elementor\\Plugin')
             && isset(\Elementor\Plugin::$instance)
