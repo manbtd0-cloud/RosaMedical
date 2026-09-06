@@ -343,3 +343,48 @@ html[dir="rtl"] .rosa-live-shop-families__grid b { transform: scaleX(-1); }
     padding-block: 2.7rem 3rem;
   }
 }
+
+/* Simplified Pass 4: trim only the over-dense catalogue surfaces. */
+@media (min-width: 64.0625rem) {
+  .rosa-live-shop-grid .rosa-preview-product:nth-child(n + 13) {
+    display: none;
+  }
+
+  .rosa-live-shop-catalogue {
+    padding-block: 4rem 4.75rem;
+  }
+
+  .rosa-live-shop-grid {
+    gap: 1rem;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product {
+    padding: .55rem;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product__media {
+    aspect-ratio: 1 / .88;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product__body {
+    padding: .7rem .1rem .25rem;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .rosa-live-shop-grid .rosa-preview-product:nth-child(n + 17) {
+    display: none;
+  }
+
+  .rosa-live-shop-catalogue {
+    padding-block: 2.5rem 3rem;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product__media {
+    aspect-ratio: 1 / .88;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product__body {
+    padding: .55rem .08rem .2rem;
+  }
+}
