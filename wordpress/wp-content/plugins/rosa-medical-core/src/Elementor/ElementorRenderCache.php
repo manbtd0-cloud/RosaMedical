@@ -7,7 +7,7 @@ namespace RosaMedical\Core\Elementor;
 final class ElementorRenderCache
 {
     public const OPTION = 'rosa_elementor_render_cache_version';
-    public const VERSION = '2026-09-06-live-visual-recovery-1';
+    public const VERSION = '2026-09-06-live-visual-recovery-2';
     private const TEMPLATE = 'page-templates/rosa-elementor-authoring.php';
 
     public static function ensureFresh(): void
