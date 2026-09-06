@@ -219,3 +219,127 @@ html[dir="rtl"] .rosa-live-shop-families__grid b { transform: scaleX(-1); }
   .rosa-live-shop-families__grid b { display: none; }
   .rosa-live-shop-families__grid strong { font-size: .58rem; }
 }
+
+/* Simplified Pass 3: prioritize overall live rhythm over pixel-perfect matching. */
+.rosa-live-shop-support__intro .rosa-preview-media-slot {
+  margin-block-start: 1.75rem;
+  min-height: 17rem;
+  border-radius: .4rem;
+}
+
+@media (min-width: 64.0625rem) {
+  .rosa-live-shop-catalogue {
+    padding-block: 4.5rem 5.75rem;
+  }
+
+  .rosa-live-shop-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product {
+    padding: .7rem;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product__media {
+    aspect-ratio: 1 / 1;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product__body {
+    padding: .9rem .2rem .35rem;
+  }
+
+  .rosa-live-shop-workflow {
+    padding-block: 5.25rem 6rem;
+  }
+
+  .rosa-live-shop-support {
+    padding-block: 4.75rem 5rem;
+  }
+
+  .rosa-live-shop-support__layout {
+    gap: 4rem;
+  }
+
+  .rosa-live-shop-support__intro .rosa-preview-media-slot {
+    min-height: 19rem;
+  }
+
+  .rosa-live-shop-families {
+    padding-block: 3.4rem 4rem;
+  }
+}
+
+@media (min-width: 48rem) and (max-width: 64rem) {
+  .rosa-live-shop-catalogue {
+    padding-block: 3.75rem 4.5rem;
+  }
+
+  .rosa-live-shop-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product:nth-child(n + 16) {
+    display: none;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product__media {
+    aspect-ratio: 1 / .96;
+  }
+
+  .rosa-live-shop-workflow {
+    padding-block: 4.4rem;
+  }
+
+  .rosa-live-shop-support {
+    padding-block: 4rem;
+  }
+
+  .rosa-live-shop-support__intro .rosa-preview-media-slot {
+    min-height: 16rem;
+  }
+
+  .rosa-live-shop-families {
+    padding-block: 3rem 3.5rem;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .rosa-live-shop-catalogue {
+    padding-block: 2.8rem 3.5rem;
+  }
+
+  .rosa-live-shop-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .72rem;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product__media {
+    aspect-ratio: 1 / 1;
+  }
+
+  .rosa-live-shop-grid .rosa-preview-product__body {
+    padding: .65rem .08rem .25rem;
+  }
+
+  .rosa-live-shop-workflow {
+    padding-block: 3.65rem;
+  }
+
+  .rosa-live-shop-support {
+    padding-block: 3.75rem;
+  }
+
+  .rosa-live-shop-support__layout {
+    gap: 1.5rem;
+  }
+
+  .rosa-live-shop-support__intro .rosa-preview-media-slot {
+    min-height: 13rem;
+  }
+
+  .rosa-live-shop-families {
+    padding-block: 2.7rem 3rem;
+  }
+}
