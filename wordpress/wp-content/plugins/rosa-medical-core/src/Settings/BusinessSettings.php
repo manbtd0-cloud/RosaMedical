@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace RosaMedical\Core\Settings;
 
+use RosaMedical\Core\Admin\Capabilities;
+
 final class BusinessSettings
 {
     public const OPTION_NAME = 'rosa_business_settings';
@@ -103,7 +105,7 @@ final class BusinessSettings
         add_options_page(
             __('Rosa Business Settings', 'rosa-medical'),
             __('Rosa Business', 'rosa-medical'),
-            'manage_options',
+            Capabilities::MANAGE_CONTENT,
             'rosa-business-settings',
             [self::class, 'renderPage']
         );
@@ -127,7 +129,7 @@ final class BusinessSettings
 
     public static function renderPage(): void
     {
-        if (! current_user_can('manage_options')) {
+        if (! current_user_can(Capabilities::MANAGE_CONTENT)) {
             return;
         }
         ?>
