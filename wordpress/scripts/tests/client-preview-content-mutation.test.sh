@@ -165,7 +165,15 @@ assert_elementor_excludes_protected_values
 whatsapp_value="$(wp eval '$value=get_option("rosa_business_settings",[]); echo is_array($value)?(string)($value["whatsapp"]??""):"";')"
 [[ "$whatsapp_value" == '+966 55 000 3344' ]] || fail 'central WhatsApp setting did not retain the ownership mutation'
 
-bash "$ROOT_DIR/wordpress/scripts/client-preview-seed.sh" >/dev/null
+# Reference-runtime setup may export ROSA_PREVIEW_* business overrides in the
+# caller shell. A routine seed in this ownership test must exercise the normal
+# non-overriding path rather than accidentally replacing the disposable values.
+env \
+  -u ROSA_PREVIEW_PHONE \
+  -u ROSA_PREVIEW_EMAIL \
+  -u ROSA_PREVIEW_ADDRESS \
+  -u ROSA_PREVIEW_ADDRESS_AR \
+  bash "$ROOT_DIR/wordpress/scripts/client-preview-seed.sh" >/dev/null
 seed_output="$(bash "$ROOT_DIR/wordpress/scripts/elementor-authoring-seed.sh")"
 [[ "$(grep -c '| skipped$' <<<"$seed_output")" -eq 6 ]] || fail 'normal Elementor reseed must skip all six migrated documents during ownership test'
 
