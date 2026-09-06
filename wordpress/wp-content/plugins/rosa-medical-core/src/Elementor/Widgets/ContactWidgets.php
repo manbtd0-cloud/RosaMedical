@@ -26,18 +26,23 @@ final class ContactLayoutWidget extends AbstractRosaSectionWidget
     protected function register_controls(): void
     {
         $this->beginContentSection('Conversation & Message');
-        $this->addText('conversation_eyebrow', 'Conversation eyebrow', 'Contact Rosa');
-        $this->addText('conversation_title', 'Conversation heading', 'Let’s start talking about your requirements.');
-        $this->addTextarea('conversation_body', 'Conversation body', 'Share the instrument family, catalogue reference or configuration you need and our team will help you prepare the next step.');
+
+        // These live-recovery controls intentionally default to an empty value.
+        // The public template can then fall back to the correct localized live
+        // copy on existing EN/AR Elementor documents that predate the controls.
+        $this->addText('conversation_eyebrow', 'Conversation eyebrow', '');
+        $this->addText('conversation_title', 'Conversation heading', '');
+
         $this->addText('location_label', 'Location label', 'Location');
         $this->addText('phone_label', 'Phone label', 'Call us');
         $this->addText('email_label', 'Email label', 'Email us');
-        $this->addText('message_title', 'Message card heading', 'Send us a message');
+        $this->addText('form_title', 'Message card heading', '');
         $this->addText('field_name', 'Name field label', 'Name');
         $this->addText('field_phone', 'Phone field label', 'Phone');
         $this->addText('field_subject', 'Subject field label', 'Subject');
+        $this->addText('field_email', 'Email field label', '');
         $this->addText('field_message', 'Message field label', 'Message');
-        $this->addText('send_email', 'Email action label', 'Send by email');
+        $this->addText('send_email', 'Send button label', '');
         $this->end_controls_section();
     }
     protected function render(): void { $this->renderSection('contact-layout'); }
