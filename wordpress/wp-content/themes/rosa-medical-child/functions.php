@@ -77,6 +77,17 @@ add_action('wp_enqueue_scripts', static function (): void {
         wp_enqueue_style('rosa-client-preview', get_stylesheet_directory_uri() . '/assets/css/client-preview.css', ['rosa-medical-base'], $version);
         wp_enqueue_style('rosa-live-visual-recovery', get_stylesheet_directory_uri() . '/assets/css/live-visual-recovery.css', ['rosa-client-preview'], $version);
 
+        $isShopSurface = $pageTemplate === 'page-templates/client-preview-shop.php'
+            || (function_exists('is_shop') && (is_shop() || is_product_category() || is_product_tag()));
+        if ($isShopSurface) {
+            wp_enqueue_style(
+                'rosa-shop-live-visual-recovery',
+                get_stylesheet_directory_uri() . '/assets/css/shop-live-visual-recovery.css',
+                ['rosa-live-visual-recovery'],
+                $version
+            );
+        }
+
         $media = get_option(ROSA_PREVIEW_MEDIA_OPTION, []);
         $editableMediaKeys = [
             'home-hero-01', 'home-who-01', 'home-feature-01',
