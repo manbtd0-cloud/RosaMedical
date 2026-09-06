@@ -54,6 +54,8 @@ run node --check "$ROOT_DIR/wordpress/wp-content/plugins/rosa-medical-core/asset
 run node --check wordpress/scripts/tests/medicashop-elementor-home-fidelity.test.mjs
 run node --check wordpress/scripts/medicashop-elementor-parity-capture.mjs
 run node --check wordpress/scripts/tests/elementor-authoring-about-contact.test.mjs
+run node --check wordpress/scripts/live-visual-audit.mjs
+run node --check wordpress/scripts/live-site-sync-check.mjs
 run node wordpress/scripts/tests/client-preview-capture.test.mjs
 
 run bash "$SCRIPT_DIR/foundation-bootstrap.sh"
@@ -171,4 +173,26 @@ run node wordpress/scripts/tests/client-preview-accessibility.test.mjs "$home_ur
 run node wordpress/scripts/tests/medicashop-elementor-home-fidelity.test.mjs "$home_url"
 run node wordpress/scripts/tests/elementor-authoring-about-contact.test.mjs "$home_url"
 
-printf 'PASS: Rosa WordPress runtime matches the finished template with Elementor authoring, bilingual routes, editable content and catalogue regressions intact\n'
+# Strict visual acceptance is opt-in because it consumes the frozen live-site audit.
+# Normal/offline verification remains deterministic and does not require internet access.
+if [[ -n "${ROSA_LIVE_BASELINE_DIR:-}" ]]; then
+  [[ -d "$ROSA_LIVE_BASELINE_DIR" ]] || fail "ROSA_LIVE_BASELINE_DIR is not a directory: $ROSA_LIVE_BASELINE_DIR"
+  strict_out="${ROSA_LIVE_AUDIT_OUT:-$ROOT_DIR/artifacts/live-visual-recovery/strict-runtime}"
+  run node wordpress/scripts/live-visual-audit.mjs \
+    --baseline "$ROSA_LIVE_BASELINE_DIR" \
+    --current "$home_url" \
+    --out "$strict_out" \
+    --verify
+
+  # Periodic production sync is separately opt-in. It detects target drift and never
+  # mutates/replaces the frozen baseline.
+  if [[ -n "${ROSA_LIVE_REFERENCE_URL:-}" ]]; then
+    sync_out="${ROSA_LIVE_SYNC_OUT:-$ROOT_DIR/artifacts/live-visual-recovery/strict-runtime-live-sync}"
+    run node wordpress/scripts/live-site-sync-check.mjs \
+      --baseline "$ROSA_LIVE_BASELINE_DIR" \
+      --live "$ROSA_LIVE_REFERENCE_URL" \
+      --out "$sync_out"
+  fi
+fi
+
+printf 'PASS: Rosa WordPress runtime passes bilingual authoring, catalogue, ownership, accessibility and optional frozen-live visual acceptance\n'
