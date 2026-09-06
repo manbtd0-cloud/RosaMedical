@@ -16,7 +16,7 @@ fail(){ printf 'FAIL: %s\n' "$1" >&2; exit 1; }
 [[ -f "$VIDEO_REVIEW" ]] || fail 'client preview video review helper missing'
 [[ -f "$PARITY_CAPTURE" ]] || fail 'finished-template parity capture missing'
 [[ -f "$SECONDARY_FIDELITY" ]] || fail 'secondary-page finished-target fidelity test missing'
-grep -Fq 'client-preview-seed.sh' "$RUNTIME" || fail 'runtime verifier does not seed client preview'
+grep -Fq 'client-preview-seed.sh' "$RUNTIME" || fail 'client preview runtime verifier does not seed client preview'
 grep -Fq 'medicashop-elementor-reference-contract.test.sh' "$RUNTIME" || fail 'runtime verifier omits finished-template source authority contract'
 grep -Fq 'medicashop-elementor-home-contract.test.php' "$RUNTIME" || fail 'runtime verifier omits finished-template Elementor topology contract'
 grep -Fq 'medicashop-elementor-home-fidelity.test.mjs' "$RUNTIME" || fail 'runtime verifier omits finished-template browser geometry acceptance'
@@ -33,6 +33,7 @@ grep -Fq 'client-preview-accessibility.test.mjs' "$RUNTIME" || fail 'runtime ver
 grep -Fq 'client-preview-video-review.mjs' "$VIDEO" || fail 'video capture does not inspect the generated recording'
 grep -Fq 'https://rosamedical.org/' "$PARITY_CAPTURE" || fail 'finished-template capture does not default to deployed visual reference'
 grep -Fq 'artifacts/medicashop-elementor-parity' "$PARITY_CAPTURE" || fail 'finished-template capture output directory changed'
+grep -Fq 'settlePageMedia' "$PARITY_CAPTURE" || fail 'finished-template parity capture does not settle below-fold media'
 for route in '/about/' '/contact/' '/shop/' '/ar/about/' '/ar/contact/' '/ar/shop/'; do
   grep -Fq "$route" "$PARITY_CAPTURE" || fail "finished-template parity capture omits $route"
 done
