@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createRequire } from 'node:module';
+import { settlePageMedia } from './client-preview-capture.mjs';
 
 const require = createRequire(new URL('../../apps/web/package.json', import.meta.url));
 const { chromium } = require('@playwright/test');
@@ -74,23 +75,6 @@ await fs.mkdir(path.join(outputDir, 'reference'), { recursive: true });
 await fs.mkdir(path.join(outputDir, 'local'), { recursive: true });
 const browser = await chromium.launch({ headless: true });
 
-async function settle(page) {
-  await page.evaluate(async () => {
-    if (document.fonts?.ready) await document.fonts.ready;
-    for (const image of Array.from(document.images)) {
-      if (!image.complete) {
-        await new Promise((resolve) => {
-          const done = () => resolve();
-          image.addEventListener('load', done, { once: true });
-          image.addEventListener('error', done, { once: true });
-        });
-      }
-      try { await image.decode?.(); } catch (_) {}
-    }
-    window.scrollTo(0, 0);
-  });
-}
-
 function slugSelector(selector, index) {
   return `${String(index + 1).padStart(2, '0')}-${selector.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase() || 'section'}`;
 }
@@ -126,7 +110,8 @@ async function capture(base, sourceName, route, width, height) {
   const page = await context.newPage();
   const url = new URL(route.path, base);
   await page.goto(url.href, { waitUntil: 'load', timeout: 60_000 });
-  await settle(page);
+  await settlePageMedia(page, { scrollDelayMs: 10 });
+  await page.evaluate(() => window.scrollTo(0, 0));
 
   const directory = sourceName === 'reference' ? 'reference' : 'local';
   const stem = `${route.key}-${width}x${height}`;
