@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace RosaMedical\Core;
 
+use RosaMedical\Core\Admin\Capabilities;
 use RosaMedical\Core\Admin\RosaAdmin;
 use RosaMedical\Core\Elementor\ElementorIntegration;
 use RosaMedical\Core\Settings\BusinessSettings;
@@ -23,6 +24,11 @@ final class Plugin
                 dirname(plugin_basename(ROSA_MEDICAL_CORE_FILE)) . '/languages'
             );
         });
+        add_action('init', [Capabilities::class, 'ensure'], 20);
+
+        foreach (['rosa_business', 'rosa_media', 'rosa_content_site', 'rosa_content_shop'] as $group) {
+            add_filter('option_page_capability_' . $group, [Capabilities::class, 'settingsCapability']);
+        }
 
         add_action('admin_init', [BusinessSettings::class, 'register']);
         add_action('admin_init', [ContentSettings::class, 'register']);
