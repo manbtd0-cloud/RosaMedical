@@ -28,6 +28,7 @@ require_once __DIR__ . '/src/Elementor/WidgetRegistry.php';
 require_once __DIR__ . '/src/Elementor/ElementorIntegration.php';
 require_once __DIR__ . '/src/Elementor/ElementorSeedData.php';
 require_once __DIR__ . '/src/Elementor/ElementorPageSeeder.php';
+require_once __DIR__ . '/src/Elementor/ElementorRenderCache.php';
 require_once __DIR__ . '/src/Plugin.php';
 
 use RosaMedical\Core\Plugin;
