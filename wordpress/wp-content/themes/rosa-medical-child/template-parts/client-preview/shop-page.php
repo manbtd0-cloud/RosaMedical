@@ -104,7 +104,7 @@ $workflow = $locale === 'ar'
       // cards only; product truth itself remains exclusively in WooCommerce.
       $familySequence = [0, 1, 2, 3, 4, 0, 2, 3, 4, 1, 2, 0];
       $familyCursor = 0;
-      while ($rendered < 12) :
+      while ($rendered < 18) :
           $family = $families[$familySequence[$familyCursor % count($familySequence)]];
           get_template_part('template-parts/client-preview/product-card', null, [
               'family' => [
@@ -150,7 +150,7 @@ $workflow = $locale === 'ar'
     <div class="rosa-live-shop-support__grid">
       <article><span>01</span><div><h3><?php echo esc_html($locale === 'ar' ? 'مراجع واضحة' : 'Clear references'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'استخدم أسماء الفئات وأكواد الكتالوج عند تحديد احتياجك.' : 'Use family names and catalogue codes when identifying your requirement.'); ?></p></div></article>
       <article><span>02</span><div><h3><?php echo esc_html($locale === 'ar' ? 'تكوينات دقيقة' : 'Exact configurations'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'راجع الخيارات المتاحة للأداة قبل إرسال الطلب.' : 'Review the available instrument options before sending your request.'); ?></p></div></article>
-      <article><span>03</span><div><h3><?php echo esc_html($locale === 'ar' ? 'تواصل مباشر' : 'Direct support'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'شارك متطلباتك مع فريق روزا للحصول على دعم عرض السعر.' : 'Share your requirements with the Rosa team for quotation support.'); ?></p></div></article>
+      <article><span>03</span><div><h3><?php echo esc_html($locale === 'ar' ? 'تواصل مباشر' : 'Direct support'); ?></h3><p><?php echo esc_html($locale === 'ar' ? 'شارك متطلباتك مع فريق روزا للحصول على دعم عرض السعر.' : 'Share your requirements with the Rosa team for quotation support.'); ?></p></article>
     </div>
   </div>
 </section>
