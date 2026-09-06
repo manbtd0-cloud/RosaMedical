@@ -7,6 +7,7 @@ namespace RosaMedical\Core;
 use RosaMedical\Core\Admin\Capabilities;
 use RosaMedical\Core\Admin\RosaAdmin;
 use RosaMedical\Core\Elementor\ElementorIntegration;
+use RosaMedical\Core\Elementor\ElementorRenderCache;
 use RosaMedical\Core\Settings\BusinessSettings;
 use RosaMedical\Core\Settings\ContentSettings;
 use RosaMedical\Core\Settings\MediaSettings;
@@ -25,6 +26,7 @@ final class Plugin
             );
         });
         add_action('init', [Capabilities::class, 'ensure'], 20);
+        add_action('init', [ElementorRenderCache::class, 'ensureFresh'], 30);
 
         foreach (['rosa_business', 'rosa_media', 'rosa_content_site', 'rosa_content_shop'] as $group) {
             add_filter('option_page_capability_' . $group, [Capabilities::class, 'settingsCapability']);
