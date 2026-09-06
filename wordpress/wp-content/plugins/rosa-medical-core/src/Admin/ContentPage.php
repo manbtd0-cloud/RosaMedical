@@ -11,7 +11,7 @@ final class ContentPage
 {
     public static function render(string $section): void
     {
-        if (! current_user_can('manage_options')) {
+        if (! current_user_can(Capabilities::MANAGE_CONTENT)) {
             return;
         }
 
