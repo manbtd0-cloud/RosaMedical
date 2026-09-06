@@ -102,8 +102,7 @@ final class ElementorSeedData
         if ($pageType === 'contact') {
             return [
                 self::spec('rosa-page-hero-contact', 'contact', ['page_eyebrow', 'page_title', 'page_body']),
-                self::spec('rosa-contact-layout', 'contact', ['location_label', 'phone_label', 'email_label', 'form_title', 'field_name', 'field_phone', 'field_subject', 'field_message', 'send_email']),
-                self::spec('rosa-contact-map', 'contact', ['map_eyebrow', 'map_button']),
+                self::spec('rosa-contact-layout', 'contact', ['location_label', 'phone_label', 'email_label', 'field_name', 'field_phone', 'field_subject', 'field_message', 'send_email']),
             ];
         }
 
