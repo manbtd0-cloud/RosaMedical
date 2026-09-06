@@ -1,0 +1,367 @@
+/*
+ * Shop live-visual recovery.
+ * Structural first pass against the frozen rosamedical.org Shop baseline.
+ * Fine-grained geometry is tuned only after live-vs-local screenshot review.
+ */
+
+.rosa-live-shop-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(4.75rem, 8vw, 7.25rem);
+  background:
+    radial-gradient(circle at 82% 28%, rgb(255 255 255 / .2), transparent 28%),
+    linear-gradient(112deg, #c9828c 0%, #d8949d 50%, #e3a0a8 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.rosa-live-shop-hero::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgb(80 41 51 / .08), transparent 38%, rgb(255 255 255 / .04));
+  content: "";
+}
+
+.rosa-live-shop-hero__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.rosa-live-shop-hero .rosa-preview-eyebrow {
+  color: rgb(255 255 255 / .8);
+}
+
+.rosa-live-shop-hero h1 {
+  margin: .2rem 0 .8rem;
+  color: #fff !important;
+  font-size: clamp(2.8rem, 6vw, 5.25rem);
+  font-weight: 600;
+  letter-spacing: -.055em;
+  line-height: 1;
+}
+
+.rosa-live-shop-hero > .rosa-preview-rail > p:not(.rosa-preview-eyebrow) {
+  max-width: 38rem;
+  margin: 0 auto 2rem;
+  color: rgb(255 255 255 / .92);
+}
+
+.rosa-live-shop-search {
+  width: min(46rem, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .65rem;
+  margin-inline: auto;
+  padding: .55rem;
+  border-radius: .45rem;
+  background: #fff;
+  box-shadow: 0 1rem 2.5rem rgb(64 30 37 / .16);
+}
+
+.rosa-live-shop-search input[type="search"] {
+  min-width: 0;
+  min-height: 3rem;
+  border: 0;
+  background: #fff;
+  padding: .8rem 1rem;
+  color: var(--preview-ink);
+  font: inherit;
+  outline: 0;
+}
+
+.rosa-live-shop-search .rosa-preview-button {
+  min-width: 8rem;
+  border: 0;
+}
+
+.rosa-live-shop-catalogue,
+.rosa-live-shop-support,
+.rosa-live-shop-families {
+  padding-block: clamp(4.5rem, 7vw, 7rem);
+}
+
+.rosa-live-shop-catalogue {
+  background: #fff;
+}
+
+.rosa-live-shop-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-block-end: 2.75rem;
+}
+
+.rosa-live-shop-heading > div {
+  max-width: 44rem;
+}
+
+.rosa-live-shop-heading h2,
+.rosa-live-shop-workflow h2 {
+  margin: 0;
+  color: var(--preview-ink);
+  font-size: clamp(2rem, 3.5vw, 3.35rem);
+  font-weight: 600;
+  letter-spacing: -.045em;
+  line-height: 1.08;
+}
+
+.rosa-live-shop-heading > p {
+  max-width: 31rem;
+  margin: 0;
+  color: var(--preview-muted);
+  line-height: 1.65;
+}
+
+.rosa-live-shop-heading--center {
+  justify-content: center;
+  text-align: center;
+}
+
+.rosa-live-shop-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2vw, 1.8rem);
+}
+
+.rosa-live-shop-grid .rosa-preview-product {
+  min-width: 0;
+  padding: .75rem;
+  border-radius: .55rem;
+  background: #fff;
+  box-shadow: 0 .8rem 2.25rem rgb(17 18 20 / .07);
+}
+
+.rosa-live-shop-grid .rosa-preview-product__media {
+  aspect-ratio: 1 / .86;
+  border-radius: .4rem;
+  background: #f4f4f4;
+}
+
+.rosa-live-shop-grid .rosa-preview-product__body {
+  padding: 1rem .25rem .35rem;
+}
+
+.rosa-live-shop-grid .rosa-preview-product h3 {
+  min-height: 3rem;
+}
+
+.rosa-live-shop-workflow {
+  padding-block: clamp(5rem, 8vw, 7.5rem);
+  background: #f4f4f5;
+}
+
+.rosa-live-shop-workflow__layout {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 5.5rem);
+  align-items: center;
+}
+
+.rosa-live-shop-workflow__intro > p:last-child {
+  max-width: 35rem;
+  margin: 1.25rem 0 0;
+  line-height: 1.7;
+}
+
+.rosa-live-shop-workflow__steps {
+  display: grid;
+  gap: .75rem;
+}
+
+.rosa-live-shop-workflow__steps article {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding: 1.35rem 1.5rem;
+  border-radius: .45rem;
+  background: #fff;
+  box-shadow: 0 .75rem 2rem rgb(17 18 20 / .06);
+}
+
+.rosa-live-shop-workflow__steps article > span,
+.rosa-live-shop-support__grid article > span {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgb(224 8 21 / .09);
+  color: var(--preview-accent);
+  font-size: .75rem;
+  font-weight: 800;
+}
+
+.rosa-live-shop-workflow__steps h3,
+.rosa-live-shop-support__grid h3 {
+  margin: 0 0 .3rem;
+  color: var(--preview-ink);
+  font-size: 1rem;
+}
+
+.rosa-live-shop-workflow__steps p,
+.rosa-live-shop-support__grid p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.rosa-live-shop-support {
+  background: #fff;
+}
+
+.rosa-live-shop-support__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.rosa-live-shop-support__grid article {
+  min-height: 14rem;
+  padding: 2rem;
+  border: 1px solid var(--preview-border);
+  border-radius: .45rem;
+  background: #fff;
+}
+
+.rosa-live-shop-support__grid article > span {
+  margin-block-end: 1.5rem;
+}
+
+.rosa-live-shop-support__grid h3 {
+  font-size: 1.15rem;
+}
+
+.rosa-live-shop-families {
+  background: #f5f5f6;
+}
+
+.rosa-live-shop-families__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-block: 1px solid var(--preview-border);
+}
+
+.rosa-live-shop-families__grid a {
+  min-width: 0;
+  min-height: 8.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: .7rem;
+  align-items: center;
+  padding: 1.25rem;
+  border-inline-end: 1px solid var(--preview-border);
+  color: var(--preview-ink);
+  text-decoration: none;
+}
+
+.rosa-live-shop-families__grid a:last-child {
+  border-inline-end: 0;
+}
+
+.rosa-live-shop-families__grid span {
+  color: var(--preview-accent);
+  font-size: .7rem;
+  font-weight: 800;
+}
+
+.rosa-live-shop-families__grid strong {
+  min-width: 0;
+  font-size: 1rem;
+}
+
+.rosa-live-shop-families__grid b {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+html[dir="rtl"] .rosa-live-shop-heading,
+html[dir="rtl"] .rosa-live-shop-workflow__intro,
+html[dir="rtl"] .rosa-live-shop-workflow__steps article,
+html[dir="rtl"] .rosa-live-shop-support__grid article {
+  text-align: right;
+}
+
+html[dir="rtl"] .rosa-live-shop-families__grid b {
+  transform: scaleX(-1);
+}
+
+@media (max-width: 64rem) {
+  .rosa-live-shop-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .rosa-live-shop-families__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .rosa-live-shop-families__grid a:nth-child(3n) {
+    border-inline-end: 0;
+  }
+}
+
+@media (max-width: 48rem) {
+  .rosa-live-shop-hero {
+    padding-block: 4rem;
+  }
+
+  .rosa-live-shop-search {
+    grid-template-columns: 1fr;
+  }
+
+  .rosa-live-shop-search .rosa-preview-button {
+    width: 100%;
+  }
+
+  .rosa-live-shop-heading {
+    display: grid;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .rosa-live-shop-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rosa-live-shop-workflow__layout,
+  .rosa-live-shop-support__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rosa-live-shop-families__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rosa-live-shop-families__grid a,
+  .rosa-live-shop-families__grid a:nth-child(3n) {
+    border-inline-end: 1px solid var(--preview-border);
+  }
+
+  .rosa-live-shop-families__grid a:nth-child(2n) {
+    border-inline-end: 0;
+  }
+}
+
+@media (max-width: 30rem) {
+  .rosa-live-shop-hero h1 {
+    font-size: 2.7rem;
+  }
+
+  .rosa-live-shop-grid,
+  .rosa-live-shop-families__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rosa-live-shop-families__grid a,
+  .rosa-live-shop-families__grid a:nth-child(2n),
+  .rosa-live-shop-families__grid a:nth-child(3n) {
+    min-height: 5.75rem;
+    border-inline-end: 0;
+    border-block-end: 1px solid var(--preview-border);
+  }
+
+  .rosa-live-shop-families__grid a:last-child {
+    border-block-end: 0;
+  }
+}
